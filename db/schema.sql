@@ -15,3 +15,16 @@ CREATE TABLE IF NOT EXISTS bbs_entries (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   INDEX (user_id)
 );
+
+
+CREATE TABLE IF NOT EXISTS bbs_entry_images (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  entry_id BIGINT NOT NULL,
+  filename VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_bbs_entry_images_entry_id (entry_id),
+  CONSTRAINT fk_bbs_entry_images_entry
+    FOREIGN KEY (entry_id) REFERENCES bbs_entries(id)
+    ON DELETE CASCADE
+);
+

@@ -1,4 +1,8 @@
-FROM php:8.2-fpm
-RUN docker-php-ext-install pdo pdo_mysql mysqli
-RUN ln -snf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
- && echo Asia/Tokyo > /etc/timezone
+# Dockerfile
+FROM php:8.2-fpm AS php
+
+# 必要な拡張
+RUN docker-php-ext-install pdo_mysql
+
+# 実行ユーザーなどはデフォルトのままでOK
+WORKDIR /var/www
